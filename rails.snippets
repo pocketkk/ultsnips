@@ -1,0 +1,113 @@
+snippet rspec
+require 'rails_helper'
+
+RSpec.describe ${1:ClassName} do
+
+	context '#${2:method_name}' do
+		it '${3:first test}' do
+			${4}
+		end
+
+	end
+end
+endsnippet
+
+snippet let
+let(:${1:variable_name}) { FactoryGirl.create(${2:factory_name}) }
+${0}
+endsnippet
+
+snippet letcom
+let(:${1:company}) { create_company_without_callbacks ${2:}} 
+${0}
+endsnippet
+
+snippet letcus
+let(:${1:customer}) { create_customer_without_callbacks company: company${2:}}
+${0}
+endsnippet
+
+snippet letpay
+let(:${1:payment}) { FactoryGirl.create(:transaction, :payment, customer: customer ${2:}) }
+${0}
+endsnippet
+
+snippet letpayl
+let(:${1:payment}) { FactoryGirl.create(:payment, customer: customer ${2:}) }
+${0}
+endsnippet
+
+snippet letbil
+let(:${1:bill}) { FactoryGirl.create(:transaction, :bill, customer: customer ${2:}) } 
+${0}
+endsnippet
+
+snippet letbt
+let(:${1:billing_type}) { FactoryGirl.create(:billing_type, company: company${2:}) }
+${0}
+endsnippet
+
+snippet letbt!
+let!(:${1:billing_type} { FactoryGirl.create(:billing_type, company: company${2:}}) }
+${0}
+endsnippet
+
+snippet letpt
+let(:${1:payment_type}) { FactoryGirl.create(:payment_type, company: company, name: '${2:Credit Card}')
+${0}
+endsnippet
+
+snippet letuse
+let(:${1:user}) { FactoryGirl.create(:user, company: company${2}) }
+${0}
+endsnippet
+
+snippet letacc
+let(:${1:account}) { FactoryGirl.create(:account, company: company${2}) }
+${0}
+endsnippet
+
+snippet letat
+let(:${1:account_type}) { FactoryGirl.create(:account_type, company: company${2}) }
+${0}
+endsnippet
+
+snippet letac
+let(:${1:account_category}) { FactoryGirl.create(:account_category, company: company${2}) }
+${0}
+endsnippet
+
+snippet newjob
+${1:module Accounting}
+  class ${2:new_job_name} < MuniBilling::Jobs::Job
+    def queue(params)
+      process(MuniBilling::Jobs::Job::QUEUE_LONG_RUNNING_FORKED, params, MuniBilling::Jobs::Job::LOW_PRIORITY)
+    end
+
+    def process_job(params)
+			${3}
+
+      @user_status = BillingJob::USER_SUCCESS
+      @user_message = 'Successfully Calculated Bills'
+    rescue => e
+      @user_status = BillingJob::USER_FAIL
+      @user_message = 'Failed to Calculate Bills'
+    end
+
+  end
+end
+endsnippet
+
+snippet allret
+allow_any_instance_of(${2:Company}).to receive(:${3:default_overpayment_billing_type}).and_return(${4:billing_type})
+${0}
+endsnippet
+
+snippet allow
+allow_any_instance_of(${2:Company}).to receive(:${3:default_overpayment_billing_type})
+${0}
+endsnippet
+
+snippet ntc
+number_to_currency(${1})${0}
+endsnippet

@@ -1,0 +1,31 @@
+snippet newtxn
+	$1 = Accounting::Transaction.new(
+		transaction_date: $2,
+		another_thing: $3,
+		woohoo: $4
+	)
+$0
+endsnippet
+
+snippet def
+	def ${1:method_name}
+		${2}
+	end
+endsnippet
+
+snippet if
+	if ${1:condition}
+		${2:do_stuff}
+	end
+	$0
+endsnippet
+
+snippet ife
+	if ${1:condition}
+		${2:do_stuff}
+	else
+		${3:do_other_stuff}
+	end
+	$0
+endsnippet
+
